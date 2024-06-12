@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	const form = document.getElementById('generateForm');
 	const urlInput = document.getElementById('url');
 	const qrcodeContainer = document.getElementById('card');
+	const downloadBtn = document.getElementById('downloadBtn');
 
 	form.addEventListener('submit', function (event) {
 
@@ -34,6 +35,19 @@ document.addEventListener('DOMContentLoaded', function () {
 			height: size,
 		});
 		console.log('New QR Generated');
+	});
+
+	downloadBtn.addEventListener('click', function () {
+		const qrCodeImg = qrcodeContainer.querySelector('img');
+		if (qrCodeImg) {
+			const imgData = qrCodeImg.src;
+			const link = document.createElement('a');
+			link.href = imgData;
+			link.download = 'qrcode.png';
+			link.click();
+		} else {
+			alert('Please generate a QR code first.');
+		}
 	});
 });
 
